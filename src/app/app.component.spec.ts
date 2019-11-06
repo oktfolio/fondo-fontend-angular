@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'fondo-frontend-angular'`, () => {
+  it(`should have as title 'fondo-angular'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('fondo-frontend-angular');
+    expect(app.title).toEqual('fondo-angular');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('fondo-frontend-angular app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('fondo-angular app is running!');
   });
 });
