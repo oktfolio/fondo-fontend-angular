@@ -3,37 +3,45 @@ import {Component, Injectable, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 
 interface ItemData {
+  id: number;
+  username: string;
+  realName: string;
+  mobile: number;
+  createAt: string;
+  updateAt: string;
+  createBy: number;
+  updateBy: number;
   gender: string;
-  name: Name;
-  email: string;
+  avatar: string;
+  status: number;
 }
 
-interface Name {
-  title: string;
-  first: string;
-  last: string;
+interface Result {
+  total: number;
+  list: ItemData[];
 }
 
 @Injectable()
 export class RandomUserService {
-  randomUserUrl = 'https://api.randomuser.me/';
+  url = 'http://localhost:8080/users';
 
   getUsers(
     pageIndex: number = 1,
     pageSize: number = 10,
-    sortField: string,
-    sortOrder: string,
-    genders: string[]
-  ): Observable<{ results: ItemData[] }> {
+    // sortField: string,
+    // sortOrder: string,
+    // genders: string[]
+  ): Observable<Result> {
     let params = new HttpParams()
-      .append('page', `${pageIndex}`)
-      .append('results', `${pageSize}`)
-      .append('sortField', sortField)
-      .append('sortOrder', sortOrder);
-    genders.forEach(gender => {
-      params = params.append('gender', gender);
-    });
-    return this.http.get<{ results: ItemData[] }>(`${this.randomUserUrl}`, {
+      .append('pageNum', `${pageIndex}`)
+      .append('pageSize', `${pageSize}`);
+    // .append('results', `${results}`)
+    // .append('sortField', sortField);
+    // .append('sortOrder', sortOrder);
+    // genders.forEach(gender => {
+    //   params = params.append('gender', gender);
+    // });
+    return this.http.get<Result>(`${this.url}`, {
       params
     });
   }
@@ -45,35 +53,7 @@ export class RandomUserService {
 @Component({
   selector: 'app-user',
   providers: [RandomUserService],
-  template: `
-      <nz-table
-              #ajaxTable
-              nzShowSizeChanger
-              [nzFrontPagination]="false"
-              [nzData]="listOfData"
-              [nzLoading]="loading"
-              [nzTotal]="total"
-              [(nzPageIndex)]="pageIndex"
-              [(nzPageSize)]="pageSize"
-              (nzPageIndexChange)="searchData()"
-              (nzPageSizeChange)="searchData(true)"
-      >
-          <thead (nzSortChange)="sort($event)" nzSingleSort>
-          <tr>
-              <th nzShowSort nzSortKey="name">Name</th>
-              <th nzShowFilter [nzFilters]="filterGender" (nzFilterChange)="updateFilter($event)">Gender</th>
-              <th nzShowSort nzSortKey="email"><span>Email</span></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let data of ajaxTable.data">
-              <td>{{ data.name.first }} {{ data.name.last }}</td>
-              <td>{{ data.gender }}</td>
-              <td>{{ data.email }}</td>
-          </tr>
-          </tbody>
-      </nz-table>
-  `
+  templateUrl: './user.component.html',
 })
 export class UserComponent implements OnInit {
   pageIndex = 1;
@@ -83,7 +63,7 @@ export class UserComponent implements OnInit {
   loading = true;
   sortValue: string | null = null;
   sortKey: string | null = null;
-  filterGender = [{text: 'male', value: 'male'}, {text: 'female', value: 'female'}];
+  filterGender = [{text: 'male', value: 'M'}, {text: 'female', value: 'F'}];
   searchGenderList: string[] = [];
 
   sort(sort: { key: string; value: string }): void {
@@ -101,11 +81,11 @@ export class UserComponent implements OnInit {
     }
     this.loading = true;
     this.randomUserService
-      .getUsers(this.pageIndex, this.pageSize, this.sortKey!, this.sortValue!, this.searchGenderList)
-      .subscribe(data => {
+      .getUsers(this.pageIndex, this.pageSize, /*this.sortKey!, this.sortValue!, this.searchGenderList*/)
+      .subscribe((data: Result) => {
         this.loading = false;
-        this.total = 200;
-        this.listOfData = data.results;
+        this.total = data.total;
+        this.listOfData = data.list;
       });
   }
 

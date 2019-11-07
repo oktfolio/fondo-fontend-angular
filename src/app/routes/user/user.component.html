@@ -1,1 +1,33 @@
-<p>user works!</p>
+<nz-table
+    #ajaxTable
+    nzShowSizeChanger
+    [nzFrontPagination]="false"
+    [nzData]="listOfData"
+    [nzLoading]="loading"
+    [nzTotal]="total"
+    [(nzPageIndex)]="pageIndex"
+    [(nzPageSize)]="pageSize"
+    (nzPageIndexChange)="searchData()"
+    (nzPageSizeChange)="searchData(true)"
+>
+  <thead (nzSortChange)="sort($event)" nzSingleSort>
+  <tr>
+    <th nzShowSort nzSortKey="id">Id</th>
+    <th nzShowSort nzSortKey="username">用户名</th>
+    <th nzShowSort nzSortKey="mobile"><span>电话</span></th>
+    <th nzShowSort nzSortKey="avatar"><span>头像</span></th>
+    <th nzShowSort nzSortKey="realName"><span>姓名</span></th>
+    <th nzShowSort nzSortKey="status"><span>状态</span></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of listOfData">
+    <td>{{ data.id }}</td>
+    <td>{{ data.username }}</td>
+    <td>{{ data.mobile }}</td>
+    <td>{{ data.avatar }}</td>
+    <td>{{ data.realName }}</td>
+    <td>{{ data.status }}</td>
+  </tr>
+  </tbody>
+</nz-table>
