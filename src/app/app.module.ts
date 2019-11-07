@@ -14,6 +14,7 @@ import {RouteRoutingModule} from './routes/routes-routing.module';
 import {PassportComponent} from './layout/passport/passport.component';
 import {WelcomeComponent} from './routes/welcome/welcome.component';
 import {LoginComponent} from './routes/login/login.component';
+import { UserComponent } from './routes/user/user.component';
 
 registerLocaleData(zh);
 
@@ -23,7 +24,8 @@ registerLocaleData(zh);
     FrameComponent,
     PassportComponent,
     WelcomeComponent,
-    LoginComponent
+    LoginComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

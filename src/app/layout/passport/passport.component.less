@@ -1,3 +1,5 @@
+@import '../../../theme.less';
+
 :host {
   ::ng-deep {
     .container {
@@ -31,7 +33,7 @@
       margin-bottom: 24px;
     }
 
-    @media (min-width: 768px/*@screen-md-min*/
+    @media (min-width: /*768px*/ @screen-md-min
     ) {
       .container {
         background-image: url('https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg');
@@ -65,7 +67,7 @@
 
     .title {
       position: relative;
-      color: /*@heading-color*/ fade(#000, 85%);
+      color: @heading-color /*fade(#000, 85%)*/;
       font-weight: 600;
       font-size: 33px;
       font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
@@ -75,8 +77,8 @@
     .desc {
       margin-top: 12px;
       margin-bottom: 40px;
-      color: /*@text-color-secondary*/ fade(#000, 45%);
-      font-size: /*@font-size-base*/ 14px;
+      color: @text-color-secondary /*fade(#000, 45%)*/;
+      font-size: @font-size-base /*14px*/;
     }
   }
 }

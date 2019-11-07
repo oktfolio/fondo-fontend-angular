@@ -5,6 +5,7 @@ import {AppComponent} from '../app.component';
 import {FrameComponent} from '../layout/frame/frame.component';
 import {PassportComponent} from '../layout/passport/passport.component';
 import {WelcomeComponent} from './welcome/welcome.component';
+import {UserComponent} from './user/user.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,8 @@ const routes: Routes = [
     component: FrameComponent,
     children: [
       {path: '', redirectTo: 'welcome', pathMatch: 'full'},
-      {path: 'welcome', component: WelcomeComponent}
+      {path: 'welcome', component: WelcomeComponent},
+      {path: 'user', component: UserComponent}
     ]
   },
   {
