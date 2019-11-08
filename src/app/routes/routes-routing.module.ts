@@ -1,11 +1,11 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {LoginComponent} from './login/login.component';
-import {AppComponent} from '../app.component';
 import {FrameComponent} from '../layout/frame/frame.component';
 import {PassportComponent} from '../layout/passport/passport.component';
 import {WelcomeComponent} from './welcome/welcome.component';
 import {UserComponent} from './user/user.component';
+import {CreateUserComponent} from './create-user/create-user.component';
 
 const routes: Routes = [
   {
@@ -14,7 +14,8 @@ const routes: Routes = [
     children: [
       {path: '', redirectTo: 'welcome', pathMatch: 'full'},
       {path: 'welcome', component: WelcomeComponent},
-      {path: 'user', component: UserComponent}
+      {path: 'user', component: UserComponent},
+      {path: 'create-user', component: CreateUserComponent}
     ]
   },
   {

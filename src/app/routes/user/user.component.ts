@@ -32,7 +32,7 @@ export class RandomUserService {
     // sortOrder: string,
     // genders: string[]
   ): Observable<Result> {
-    let params = new HttpParams()
+    const params = new HttpParams()
       .append('pageNum', `${pageIndex}`)
       .append('pageSize', `${pageSize}`);
     // .append('results', `${results}`)
