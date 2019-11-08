@@ -6,6 +6,7 @@ import {PassportComponent} from '../layout/passport/passport.component';
 import {WelcomeComponent} from './welcome/welcome.component';
 import {UserComponent} from './user/user.component';
 import {CreateUserComponent} from './create-user/create-user.component';
+import {ResourceTreeComponent} from '../resource-tree/resource-tree.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,8 @@ const routes: Routes = [
       {path: '', redirectTo: 'welcome', pathMatch: 'full'},
       {path: 'welcome', component: WelcomeComponent},
       {path: 'user', component: UserComponent},
-      {path: 'create-user', component: CreateUserComponent}
+      {path: 'create-user', component: CreateUserComponent},
+      {path: 'resource-tree', component: ResourceTreeComponent}
     ]
   },
   {

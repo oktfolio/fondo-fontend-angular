@@ -16,6 +16,7 @@ import {WelcomeComponent} from './routes/welcome/welcome.component';
 import {LoginComponent} from './routes/login/login.component';
 import { UserComponent } from './routes/user/user.component';
 import { CreateUserComponent } from './routes/create-user/create-user.component';
+import { ResourceTreeComponent } from './resource-tree/resource-tree.component';
 
 registerLocaleData(zh);
 
@@ -27,7 +28,8 @@ registerLocaleData(zh);
     WelcomeComponent,
     LoginComponent,
     UserComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    ResourceTreeComponent
   ],
   imports: [
     BrowserModule,

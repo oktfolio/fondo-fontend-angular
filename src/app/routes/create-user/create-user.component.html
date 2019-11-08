@@ -1,7 +1,7 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="username">用户名</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your username!">
       <input nz-input formControlName="username" id="username"/>
     </nz-form-control>
   </nz-form-item>
