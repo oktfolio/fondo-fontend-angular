@@ -17,6 +17,8 @@ import {LoginComponent} from './routes/login/login.component';
 import { UserComponent } from './routes/user/user.component';
 import { CreateUserComponent } from './routes/create-user/create-user.component';
 import { ResourceTreeComponent } from './resource-tree/resource-tree.component';
+import { UserInfoComponent } from './user-info/user-info.component';
+import { AvatarComponent } from './avatar/avatar.component';
 
 registerLocaleData(zh);
 
@@ -29,7 +31,9 @@ registerLocaleData(zh);
     LoginComponent,
     UserComponent,
     CreateUserComponent,
-    ResourceTreeComponent
+    ResourceTreeComponent,
+    UserInfoComponent,
+    AvatarComponent
   ],
   imports: [
     BrowserModule,
