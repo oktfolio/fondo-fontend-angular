@@ -7,6 +7,8 @@ import {WelcomeComponent} from './welcome/welcome.component';
 import {UserComponent} from './user/user.component';
 import {CreateUserComponent} from './create-user/create-user.component';
 import {ResourceTreeComponent} from '../resource-tree/resource-tree.component';
+import {UserInfoComponent} from '../user-info/user-info.component';
+import {RoleComponent} from '../role/role.component';
 
 const routes: Routes = [
   {
@@ -17,7 +19,9 @@ const routes: Routes = [
       {path: 'welcome', component: WelcomeComponent},
       {path: 'user', component: UserComponent},
       {path: 'create-user', component: CreateUserComponent},
-      {path: 'resource-tree', component: ResourceTreeComponent}
+      {path: 'user-info', component: UserInfoComponent},
+      {path: 'resource-tree', component: ResourceTreeComponent},
+      {path: 'role', component: RoleComponent}
     ]
   },
   {

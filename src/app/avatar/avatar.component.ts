@@ -1,6 +1,5 @@
-import {Component} from '@angular/core';
+import {AfterViewInit, Component, OnChanges, OnInit} from '@angular/core';
 
-const userList = ['U', 'Lucy', 'Tom', 'Edward'];
 const colorList = ['#f56a00', '#7265e6', '#ffbf00', '#00a2ae'];
 
 @Component({
@@ -8,19 +7,12 @@ const colorList = ['#f56a00', '#7265e6', '#ffbf00', '#00a2ae'];
   templateUrl: './avatar.component.html',
   styleUrls: ['./avatar.component.less']
 })
-export class AvatarComponent {
+export class AvatarComponent implements OnInit {
 
-  text: string = userList[3];
-  color: string = colorList[3];
+  text = 'A';
+  color: string = colorList[0];
 
-  change(): void {
-    let idx = userList.indexOf(this.text);
-    ++idx;
-    if (idx === userList.length) {
-      idx = 0;
-    }
-    this.text = userList[idx];
-    this.color = colorList[idx];
+  ngOnInit(): void {
+    this.color = colorList[Math.floor(Math.random() * 4)];
   }
-
 }

@@ -56,6 +56,11 @@ export class RandomUserService {
   templateUrl: './user.component.html',
 })
 export class UserComponent implements OnInit {
+  roleVisible = false;
+  createModalVisible = false;
+  editModalVisible = false;
+  userProfileVisible = false;
+
   pageIndex = 1;
   pageSize = 10;
   total = 1;
@@ -96,5 +101,28 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchData();
+  }
+
+  openRole() {
+    this.roleVisible = true;
+  }
+
+  handleCancel($event: MouseEvent) {
+    console.log('Button cancel clicked!', $event);
+    this.roleVisible = false;
+    this.createModalVisible = false;
+    this.createModalVisible = false;
+  }
+
+  createModal() {
+    this.createModalVisible = true;
+  }
+
+  editaModal() {
+    this.createModalVisible = true;
+  }
+
+  userProfile() {
+    this.userProfileVisible = true;
   }
 }

@@ -1,0 +1,81 @@
+<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form">
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="4">
+      <nz-form-item nzFlex>
+        <nz-form-label>ID</nz-form-label>
+        <nz-form-control>
+          <input
+            nz-input
+            placeholder=""
+            [formControlName]="'id'"
+            [attr.id]="'id'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col [nzSpan]="4">
+      <nz-form-item nzFlex>
+        <nz-form-label>用户名</nz-form-label>
+        <nz-form-control>
+          <input
+            nz-input
+            placeholder=""
+            [formControlName]="'username'"
+            [attr.id]="'username'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col [nzSpan]="4">
+      <nz-form-item nzFlex>
+        <nz-form-label>电话</nz-form-label>
+        <nz-form-control>
+          <input
+            nz-input
+            placeholder=""
+            [formControlName]="'mobile'"
+            [attr.id]="'mobile'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col [nzSpan]="4">
+      <nz-form-item nzFlex>
+        <nz-form-label>性别</nz-form-label>
+        <nz-form-control>
+          <input
+            nz-input
+            placeholder=""
+            [formControlName]="'gender'"
+            [attr.id]="'gender'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col [nzSpan]="4">
+      <nz-form-item nzFlex>
+        <nz-form-label>创建时间</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24">
+          <nz-date-picker nzShowTime formControlName="createAt"></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col [nzSpan]="4" class="search-area">
+      <button nz-button [nzType]="'primary'">搜索</button>
+      <button nz-button (click)="resetForm()">清空</button>
+      <!--      <a class="collapse" (click)="toggleCollapse()">-->
+      <!--        Collapse-->
+      <!--        <i nz-icon [nzType]="isCollapse ? 'down' : 'up'"></i>-->
+      <!--      </a>-->
+    </div>
+
+  </div>
+</form>
+<!--<div class="search-result-list">-->
+<!--  Search Result List-->
+<!--</div>-->

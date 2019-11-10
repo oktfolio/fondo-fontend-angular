@@ -19,6 +19,12 @@ import { CreateUserComponent } from './routes/create-user/create-user.component'
 import { ResourceTreeComponent } from './resource-tree/resource-tree.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { AvatarComponent } from './avatar/avatar.component';
+import { RoleComponent } from './role/role.component';
+import { GenderPipePipe } from './gender-pipe.pipe';
+import { UserSelectorComponent } from './user-selector/user-selector.component';
+import { HeaderUserComponent } from './header-user/header-user.component';
+import { UserProfileDrawerComponent } from './user-profile-drawer/user-profile-drawer.component';
+import { UserEditDrawerComponent } from './user-edit-drawer/user-edit-drawer.component';
 
 registerLocaleData(zh);
 
@@ -33,7 +39,13 @@ registerLocaleData(zh);
     CreateUserComponent,
     ResourceTreeComponent,
     UserInfoComponent,
-    AvatarComponent
+    AvatarComponent,
+    RoleComponent,
+    GenderPipePipe,
+    UserSelectorComponent,
+    HeaderUserComponent,
+    UserProfileDrawerComponent,
+    UserEditDrawerComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,5 @@
+<button nz-button nzType="primary" (click)="createModal()">新建</button>
+<app-user-selector></app-user-selector>
 <nz-table
     #ajaxTable
     nzShowSizeChanger
@@ -12,32 +14,80 @@
 >
   <thead (nzSortChange)="sort($event)" nzSingleSort>
   <tr>
-    <th nzShowSort nzSortKey="id">Id</th>
+    <th nzShowSort nzSortKey="id">ID</th>
+    <!--    <th nzShowSort nzSortKey="avatar"><span>头像</span></th>-->
     <th nzShowSort nzSortKey="username">用户名</th>
     <th nzShowSort nzSortKey="mobile"><span>电话</span></th>
-    <th nzShowSort nzSortKey="avatar"><span>头像</span></th>
-    <th nzShowSort nzSortKey="realName"><span>姓名</span></th>
+    <!--    <th nzShowSort nzSortKey="realName"><span>姓名</span></th>-->
     <th nzShowSort nzSortKey="gender"><span>性别</span></th>
     <th nzShowSort nzSortKey="createAt"><span>创建时间</span></th>
     <th nzShowSort nzSortKey="createBy"><span>创建人</span></th>
     <th nzShowSort nzSortKey="updateAt"><span>修改时间</span></th>
     <th nzShowSort nzSortKey="updateBy"><span>修改人</span></th>
+    <th nzShowSort nzSortKey="roles"><span>角色</span></th>
     <th nzShowSort nzSortKey="status"><span>状态</span></th>
+    <th nzShowSort nzSortKey="action" nzRight="0px"><span>操作</span></th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let data of listOfData">
     <td>{{ data.id }}</td>
+    <!--    <td>{{ data.avatar }}</td>-->
+    <!--    <td>-->
+    <!--      <app-avatar></app-avatar>-->
+    <!--    </td>-->
     <td>{{ data.username }}</td>
     <td>{{ data.mobile }}</td>
-    <td>{{ data.avatar }}</td>
-    <td>{{ data.realName }}</td>
-    <td>{{ data.gender }}</td>
-    <td>{{ data.createAt }}</td>
-    <td>{{ data.createBy }}</td>
-    <td>{{ data.updateAt }}</td>
-    <td>{{ data.updateBy }}</td>
-    <td>{{ data.status }}</td>
+    <!--    <td>{{ data.realName }}</td>-->
+    <td>{{ data.gender | genderPipe}}</td>
+    <td>{{ data.createAt | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+    <td>{{ data.createBy}}</td>
+    <td>{{ data.updateAt | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+    <td>{{ data.updateBy}}</td>
+    <td (click)="openRole()">
+      <div class="td-role"></div>
+      Role
+    </td>
+    <td>
+      <button nz-button nzType="primary" nzSize="small" *ngIf="data.status==-1">已删除</button>
+      <button nz-button nzType="primary" nzSize="small" *ngIf="data.status==0">已停用</button>
+      <button nz-button nzType="primary" nzSize="small" *ngIf="data.status==1">正常</button>
+      <button nz-button nzType="primary" nzSize="small" *ngIf="data.status==2">已过期</button>
+      <button nz-button nzType="primary" nzSize="small" *ngIf="data.status==3">已锁定</button>
+    </td>
+    <td>
+      <button nz-button class="list-action-button" nzSize="small" nzType="primary" (click)="editaModal()">修改</button>
+      <button nz-button class="list-action-button" nzSize="small" nzType="danger">删除</button>
+      <button nz-button class="list-action-button" nzSize="small" nzType="default">停用</button>
+      <button nz-button class="list-action-button" nzSize="small" nzType="default" (click)="userProfile()">查看</button>
+    </td>
+
   </tr>
   </tbody>
 </nz-table>
+
+<nz-modal
+  [(nzVisible)]="roleVisible"
+  nzTitle="Please select"
+  (nzOnCancel)="handleCancel($event)"
+>
+  <app-resource-tree></app-resource-tree>
+</nz-modal>
+
+<nz-modal
+  [(nzVisible)]="createModalVisible"
+  nzTitle="Please select"
+  (nzOnCancel)="handleCancel($event)"
+>
+  <app-create-user></app-create-user>
+</nz-modal>
+
+<nz-modal
+  [(nzVisible)]="editModalVisible"
+  nzTitle="Please select"
+  (nzOnCancel)="handleCancel($event)"
+>
+  <app-create-user></app-create-user>
+</nz-modal>
+
+<app-user-profile-draw [visible]="userProfileVisible"></app-user-profile-draw>
