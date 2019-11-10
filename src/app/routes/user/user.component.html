@@ -56,7 +56,7 @@
       <button nz-button nzType="primary" nzSize="small" *ngIf="data.status==3">已锁定</button>
     </td>
     <td>
-      <button nz-button class="list-action-button" nzSize="small" nzType="primary" (click)="editaModal()">修改</button>
+      <button nz-button class="list-action-button" nzSize="small" nzType="primary" (click)="editUser()">修改</button>
       <button nz-button class="list-action-button" nzSize="small" nzType="danger">删除</button>
       <button nz-button class="list-action-button" nzSize="small" nzType="default">停用</button>
       <button nz-button class="list-action-button" nzSize="small" nzType="default" (click)="userProfile()">查看</button>
@@ -70,8 +70,9 @@
   [(nzVisible)]="roleVisible"
   nzTitle="Please select"
   (nzOnCancel)="handleCancel($event)"
+  nzWidth="1000px"
 >
-  <app-resource-tree></app-resource-tree>
+  <app-role-select></app-role-select>
 </nz-modal>
 
 <nz-modal
@@ -82,12 +83,5 @@
   <app-create-user></app-create-user>
 </nz-modal>
 
-<nz-modal
-  [(nzVisible)]="editModalVisible"
-  nzTitle="Please select"
-  (nzOnCancel)="handleCancel($event)"
->
-  <app-create-user></app-create-user>
-</nz-modal>
-
 <app-user-profile-draw [visible]="userProfileVisible"></app-user-profile-draw>
+<app-user-edit-drawer [visible]="userEditVisible"></app-user-edit-drawer>

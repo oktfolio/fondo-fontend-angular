@@ -58,8 +58,8 @@ export class RandomUserService {
 export class UserComponent implements OnInit {
   roleVisible = false;
   createModalVisible = false;
-  editModalVisible = false;
   userProfileVisible = false;
+  userEditVisible = false;
 
   pageIndex = 1;
   pageSize = 10;
@@ -118,11 +118,12 @@ export class UserComponent implements OnInit {
     this.createModalVisible = true;
   }
 
-  editaModal() {
-    this.createModalVisible = true;
-  }
-
   userProfile() {
     this.userProfileVisible = true;
   }
+
+  editUser() {
+    this.userEditVisible = true;
+  }
+
 }

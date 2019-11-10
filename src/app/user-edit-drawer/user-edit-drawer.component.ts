@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-user-edit-drawer',
@@ -6,7 +6,7 @@ import {Component} from '@angular/core';
   styleUrls: ['./user-edit-drawer.component.less']
 })
 export class UserEditDrawerComponent {
-  visible = false;
+  @Input() visible = false;
 
   open(): void {
     this.visible = true;
