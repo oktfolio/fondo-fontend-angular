@@ -10,8 +10,9 @@
     [(nzPageIndex)]="pageIndex"
     [(nzPageSize)]="pageSize"
     (nzPageIndexChange)="searchData()"
-    (nzPageSizeChange)="searchData(true)"
->
+    (nzPageSizeChange)="searchData(true)">
+<!--    [nzScroll]="{ y: '500px' }"-->
+<!--&gt;-->
   <thead (nzSortChange)="sort($event)" nzSingleSort>
   <tr>
     <th nzShowSort nzSortKey="id">ID</th>
