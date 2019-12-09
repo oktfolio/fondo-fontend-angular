@@ -31,7 +31,7 @@
             <a routerLink="/user-info">用户信息</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/resource-tree">资源</a>
+            <a routerLink="/resource">资源</a>
           </li>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/role">角色</a>
@@ -49,6 +49,9 @@
                [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
             ></i>
         </span>
+        <span>
+         <nz-avatar nzText="USER" nzSize="large" class="nav-avatar"></nz-avatar>
+        </span>
 
       </div>
     </nz-header>
@@ -56,7 +59,7 @@
       <div class="inner-content">
         <router-outlet></router-outlet>
       </div>
-      <nz-footer>Oktobro ©2019 Implement By Angular & NG-ZORRO</nz-footer>
+      <nz-footer>Oktobro ©2020 Implement By Angular & NG-ZORRO</nz-footer>
     </nz-content>
   </nz-layout>
 </nz-layout>

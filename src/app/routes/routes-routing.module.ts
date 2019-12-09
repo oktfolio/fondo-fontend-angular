@@ -8,6 +8,7 @@ import {UserComponent} from './user/user.component';
 import {CreateUserComponent} from './create-user/create-user.component';
 import {ResourceTreeComponent} from '../resource-tree/resource-tree.component';
 import {RoleComponent} from '../role/role.component';
+import {ResourceComponent} from './resource/resource.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
       {path: 'user', component: UserComponent},
       {path: 'create-user', component: CreateUserComponent},
       {path: 'resource-tree', component: ResourceTreeComponent},
+      {path: 'resource', component: ResourceComponent},
       {path: 'role', component: RoleComponent}
     ]
   },

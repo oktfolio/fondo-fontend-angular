@@ -1,6 +1,7 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Component, Injectable, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
+import {NzMessageService} from 'ng-zorro-antd';
 
 interface ItemData {
   id: number;
@@ -77,7 +78,7 @@ export class UserComponent implements OnInit {
     this.searchData();
   }
 
-  constructor(private randomUserService: RandomUserService) {
+  constructor(private randomUserService: RandomUserService, private messageService: NzMessageService) {
   }
 
   searchData(reset: boolean = false): void {
@@ -126,4 +127,7 @@ export class UserComponent implements OnInit {
     this.userEditVisible = true;
   }
 
+  disableUser() {
+    this.messageService.success('disable user succeed!');
+  }
 }

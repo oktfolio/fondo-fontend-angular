@@ -25,6 +25,7 @@ import { HeaderUserComponent } from './header-user/header-user.component';
 import { UserProfileDrawerComponent } from './user-profile-drawer/user-profile-drawer.component';
 import { UserEditDrawerComponent } from './user-edit-drawer/user-edit-drawer.component';
 import { RoleSelectComponent } from './role-select/role-select.component';
+import { ResourceComponent } from './routes/resource/resource.component';
 
 registerLocaleData(zh);
 
@@ -45,7 +46,8 @@ registerLocaleData(zh);
     HeaderUserComponent,
     UserProfileDrawerComponent,
     UserEditDrawerComponent,
-    RoleSelectComponent
+    RoleSelectComponent,
+    ResourceComponent
   ],
   imports: [
     BrowserModule,

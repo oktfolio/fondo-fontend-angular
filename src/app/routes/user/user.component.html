@@ -1,4 +1,4 @@
-<button nz-button nzType="primary" (click)="createModal()">新建</button>
+<button nz-button (click)="createModal()" nzType="primary">新建</button>
 <!--<app-user-selector></app-user-selector>-->
 <nz-table
     #ajaxTable
@@ -11,7 +11,7 @@
     [(nzPageSize)]="pageSize"
     (nzPageIndexChange)="searchData()"
     (nzPageSizeChange)="searchData(true)">
-<!--    [nzScroll]="{ y: '500px' }"-->
+<!--    [nzScroll]="{ y: '96%' }">-->
 <!--&gt;-->
   <thead (nzSortChange)="sort($event)" nzSingleSort>
   <tr>
@@ -59,7 +59,7 @@
     <td>
       <button nz-button class="list-action-button" nzSize="small" nzType="primary" (click)="editUser()">修改</button>
       <button nz-button class="list-action-button" nzSize="small" nzType="danger">删除</button>
-      <button nz-button class="list-action-button" nzSize="small" nzType="default">停用</button>
+      <button nz-button class="list-action-button" nzSize="small" nzType="default" (click)="disableUser()">停用</button>
       <button nz-button class="list-action-button" nzSize="small" nzType="default" (click)="userProfile()">查看</button>
     </td>
 
