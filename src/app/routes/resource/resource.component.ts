@@ -131,7 +131,22 @@ export class ResourceComponent implements OnInit {
       expand: false,
     }],
     expand: false,
-  }];
+  }, {id: 2,
+    name: '所有权限',
+    level: 0,
+    type: 1,
+    code: 'RES_ALL',
+    uri: '/**',
+    method: '*',
+    icon: '/icon',
+    parentId: null,
+    status: 1,
+    createAt: '2014-12-24 23:12:00',
+    updateAt: '2014-12-24 23:12:00',
+    createBy: 1,
+    updateBy: 1,
+    children: [],
+    expand: false}];
 
 
   ngOnInit(): void {

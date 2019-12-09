@@ -21,7 +21,8 @@
   <tbody>
   <ng-template ngFor let-data [ngForOf]="nestedTable.data">
     <tr>
-      <td nzShowExpand [(nzExpand)]="data.expand"></td>
+      <td nzShowExpand [(nzExpand)]="data.expand" *ngIf="data.children.length > 0"></td>
+      <td *ngIf="data.children.length == 0"></td>
       <td>{{ data.id }}</td>
       <td>{{ data.name }}</td>
       <td>{{ data.level }}</td>
