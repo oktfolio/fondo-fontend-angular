@@ -55,8 +55,9 @@ export class LoginComponent implements OnInit {
       .login(this.user)
       .subscribe((data: LoginResult) => {
         this.loginResult = data;
-        localStorage.setItem('access_token', data.access_token);
-        localStorage.setItem('token_type', data.token_type);
+        sessionStorage.setItem('access_token', data.access_token);
+        sessionStorage.setItem('token_type', data.token_type);
+        sessionStorage.setItem('expire_in', String(data.expires_in));
       });
 
     this.router.navigateByUrl('/');

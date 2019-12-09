@@ -1,4 +1,4 @@
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Component, Injectable, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {NzMessageService} from 'ng-zorro-antd';
@@ -42,7 +42,12 @@ export class RandomUserService {
     // genders.forEach(gender => {
     //   params = params.append('gender', gender);
     // });
+
+    const accessToken = sessionStorage.getItem('access_token');
+
+    const headers = new HttpHeaders().append('Authorization', 'Bearer ' + accessToken);
     return this.http.get<Result>(`${this.url}`, {
+      headers,
       params
     });
   }
