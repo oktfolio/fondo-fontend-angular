@@ -1,6 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {TransferItem} from 'ng-zorro-antd/transfer';
 
+interface Role {
+  id: number;
+  name: string;
+  code: string;
+  description: string;
+  status: number;
+}
 
 @Component({
   selector: 'app-role-select',
@@ -8,22 +15,47 @@ import {TransferItem} from 'ng-zorro-antd/transfer';
   styleUrls: ['./role-select.component.less'],
 })
 export class RoleSelectComponent implements OnInit {
-  list: TransferItem[] = [];
+  listRole: Role[] = [{
+    id: 1,
+    name: '超级管理员',
+    code: 'SUPER_ADMIN',
+    description: '超级管理员',
+    status: 1
+  }, {
+    id: 2,
+    name: '系统管理员',
+    code: 'ADMIN',
+    description: '系统超级管理员',
+    status: 1
+  }, {
+    id: 2,
+    name: '系统管理员系统管理员',
+    code: 'ADMINADMIN',
+    description: '系统超级管理员系统超级管理员',
+    status: 1
+  }, {
+    id: 2,
+    name: '系统管理员系统管理员系统管理员系统管理员',
+    code: 'ADMINADMINADMIN',
+    description: '系统超级管理员系统超级管理员系统超级管理员',
+    status: 1
+  }, {
+    id: 2,
+    name: '系统管理员',
+    code: 'ADMIN',
+    description: '系统超级管理员',
+    status: 1
+  }, {
+    id: 2,
+    name: '系统管理员',
+    code: 'ADMIN',
+    description: '系统超级管理员',
+    status: 1
+  }];
   disabled = false;
   showSearch = true;
 
   ngOnInit(): void {
-    for (let i = 0; i < 10; i++) {
-      this.list.push({
-        key: i.toString(),
-        title: `content${i + 1}`,
-        description: `description of content${i + 1}`,
-        disabled: i % 4 === 0,
-        tag: ['cat', 'dog', 'bird'][i % 3]
-      });
-    }
-
-    [2, 3].forEach(idx => (this.list[idx].direction = 'right'));
   }
 
   convertItems(items: TransferItem[]): TransferItem[] {

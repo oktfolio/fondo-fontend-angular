@@ -1,18 +1,18 @@
 <button nz-button (click)="createModal()" nzType="primary">新建</button>
 <!--<app-user-selector></app-user-selector>-->
 <nz-table
-    #ajaxTable
-    nzShowSizeChanger
-    [nzFrontPagination]="false"
-    [nzData]="listOfData"
-    [nzLoading]="loading"
-    [nzTotal]="total"
-    [(nzPageIndex)]="pageIndex"
-    [(nzPageSize)]="pageSize"
-    (nzPageIndexChange)="searchData()"
-    (nzPageSizeChange)="searchData(true)">
-<!--    [nzScroll]="{ y: '96%' }">-->
-<!--&gt;-->
+  #ajaxTable
+  nzShowSizeChanger
+  [nzFrontPagination]="false"
+  [nzData]="listOfData"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [(nzPageIndex)]="pageIndex"
+  [(nzPageSize)]="pageSize"
+  (nzPageIndexChange)="searchData()"
+  (nzPageSizeChange)="searchData(true)">
+  <!--    [nzScroll]="{ y: '96%' }">-->
+  <!--&gt;-->
   <thead (nzSortChange)="sort($event)" nzSingleSort>
   <tr>
     <th nzShowSort nzSortKey="id">ID</th>
@@ -45,16 +45,19 @@
     <td>{{ data.createBy}}</td>
     <td>{{ data.updateAt | date:'yyyy-MM-dd HH:mm:ss'}}</td>
     <td>{{ data.updateBy}}</td>
-    <td (click)="openRole()">
-      <div class="td-role"></div>
-      Role
+    <td>
+      <div (click)="openRole()" class="td-role">
+        <nz-tag [nzColor]="'magenta'">SUPER_ADMIN</nz-tag>
+        <nz-tag [nzColor]="'volcano'">ADMIN</nz-tag>
+        <nz-tag [nzColor]="'orange'">USER</nz-tag>
+      </div>
     </td>
     <td>
-      <button nz-button nzType="primary" nzSize="small" *ngIf="data.status==-1">已删除</button>
-      <button nz-button nzType="primary" nzSize="small" *ngIf="data.status==0">已停用</button>
-      <button nz-button nzType="primary" nzSize="small" *ngIf="data.status==1">正常</button>
-      <button nz-button nzType="primary" nzSize="small" *ngIf="data.status==2">已过期</button>
-      <button nz-button nzType="primary" nzSize="small" *ngIf="data.status==3">已锁定</button>
+      <nz-tag [nzColor]="'red'" *ngIf="data.status==-1">已删除</nz-tag>
+      <nz-tag [nzColor]="'orange'" *ngIf="data.status==0">已停用</nz-tag>
+      <nz-tag [nzColor]="'green'" *ngIf="data.status==1">正常</nz-tag>
+      <nz-tag [nzColor]="'gold'" *ngIf="data.status==2">已过期</nz-tag>
+      <nz-tag [nzColor]="'black'" *ngIf=" data.status==3">已锁定</nz-tag>
     </td>
     <td>
       <button nz-button class="list-action-button" nzSize="small" nzType="primary" (click)="editUser()">修改</button>
@@ -69,7 +72,7 @@
 
 <nz-modal
   [(nzVisible)]="roleVisible"
-  nzTitle="Please select"
+  nzTitle="请选择用户角色"
   (nzOnCancel)="handleCancel($event)"
   nzWidth="1000px"
 >

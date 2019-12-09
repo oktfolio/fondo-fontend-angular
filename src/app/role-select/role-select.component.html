@@ -1,5 +1,6 @@
 <nz-transfer
-  [nzDataSource]="list"
+  [nzListStyle]="{  'height.px': 550 }"
+  [nzDataSource]="listRole"
   [nzDisabled]="disabled"
   [nzShowSearch]="showSearch"
   [nzShowSelectAll]="false"
@@ -27,7 +28,7 @@
           (nzCheckedChange)="onItemSelectAll($event)"
         ></th>
         <th>Name</th>
-        <th *ngIf="direction === 'left'">Tag</th>
+        <th *ngIf="direction === 'left'">Code</th>
         <th>Description</th>
       </tr>
       </thead>
@@ -39,9 +40,9 @@
           [nzDisabled]="disabled || data.disabled"
           (nzCheckedChange)="onItemSelect(data)"
         ></td>
-        <td>{{ data.title }}</td>
+        <td>{{ data.name }}</td>
         <td *ngIf="direction === 'left'">
-          <nz-tag>{{ data.tag }}</nz-tag>
+          <nz-tag>{{ data.code }}</nz-tag>
         </td>
         <td>{{ data.description }}</td>
       </tr>
