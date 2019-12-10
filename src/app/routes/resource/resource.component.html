@@ -38,54 +38,46 @@
       <td>{{ data.updateAt }}</td>
       <td>{{ data.updateBy }}</td>
     </tr>
-    <tr [nzExpand]="data.expand">
-      <td></td>
-      <td colspan="24">
-        <nz-table #innerTable
-                  [nzData]="data.children"
-                  nzSize="middle"
-                  [nzShowPagination]="false">
-          <thead>
-          <tr>
-            <th nzShowExpand></th>
-            <th>ID</th>
-            <th>名称</th>
-            <th>级别</th>
-            <th>类型</th>
-            <th>编码</th>
-            <th>URI</th>
-            <th>方法</th>
-            <th>图标</th>
-            <th>父ID</th>
-            <th>状态</th>
-            <th>创建时间</th>
-            <th>创建人</th>
-            <th>修改时间</th>
-            <th>修改人</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let data of innerTable.data">
-            <td nzShowExpand [(nzExpand)]="data.expand"></td>
-            <td>{{ data.id }}</td>
-            <td>{{ data.name }}</td>
-            <td>{{ data.level }}</td>
-            <td>{{ data.type }}</td>
-            <td>{{ data.code }}</td>
-            <td>{{ data.uri }}</td>
-            <td>{{ data.method }}</td>
-            <td>{{ data.icon }}</td>
-            <td>{{ data.parentId }}</td>
-            <td>{{ data.status }}</td>
-            <td>{{ data.createAt }}</td>
-            <td>{{ data.createBy }}</td>
-            <td>{{ data.updateAt }}</td>
-            <td>{{ data.updateBy }}</td>
-           </tr>
-            </tbody>
-          </nz-table>
-        </td>
+    <ng-template *ngIf="data.expand" ngFor let-data [ngForOf]="data.children">
+      <tr class="tr-children">
+        <td nzShowExpand [(nzExpand)]="data.expand" *ngIf="data.children.length > 0"></td>
+        <td *ngIf="data.children.length == 0"></td>
+        <td>{{ data.id }}</td>
+        <td>{{ data.name }}</td>
+        <td>{{ data.level }}</td>
+        <td>{{ data.type }}</td>
+        <td>{{ data.code }}</td>
+        <td>{{ data.uri }}</td>
+        <td>{{ data.method }}</td>
+        <td>{{ data.icon }}</td>
+        <td>{{ data.parentId }}</td>
+        <td>{{ data.status }}</td>
+        <td>{{ data.createAt }}</td>
+        <td>{{ data.createBy }}</td>
+        <td>{{ data.updateAt }}</td>
+        <td>{{ data.updateBy }}</td>
       </tr>
+      <ng-template *ngIf="data.expand" ngFor let-data [ngForOf]="data.children">
+        <tr class="tr-children">
+          <td nzShowExpand [(nzExpand)]="data.expand" *ngIf="data.children.length > 0"></td>
+          <td *ngIf="data.children.length == 0"></td>
+          <td>{{ data.id }}</td>
+          <td>{{ data.name }}</td>
+          <td>{{ data.level }}</td>
+          <td>{{ data.type }}</td>
+          <td>{{ data.code }}</td>
+          <td>{{ data.uri }}</td>
+          <td>{{ data.method }}</td>
+          <td>{{ data.icon }}</td>
+          <td>{{ data.parentId }}</td>
+          <td>{{ data.status }}</td>
+          <td>{{ data.createAt }}</td>
+          <td>{{ data.createBy }}</td>
+          <td>{{ data.updateAt }}</td>
+          <td>{{ data.updateBy }}</td>
+        </tr>
+      </ng-template>
     </ng-template>
+  </ng-template>
   </tbody>
 </nz-table>
