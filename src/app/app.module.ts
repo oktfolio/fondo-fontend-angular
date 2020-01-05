@@ -19,7 +19,7 @@ import { CreateUserComponent } from './routes/create-user/create-user.component'
 import { ResourceTreeComponent } from './resource-tree/resource-tree.component';
 import { AvatarComponent } from './avatar/avatar.component';
 import { RoleComponent } from './role/role.component';
-import { GenderPipePipe } from './gender-pipe.pipe';
+import { GenderPipe } from './gender.pipe';
 import { UserSelectorComponent } from './user-selector/user-selector.component';
 import { HeaderUserComponent } from './header-user/header-user.component';
 import { UserProfileDrawerComponent } from './user-profile-drawer/user-profile-drawer.component';
@@ -27,6 +27,7 @@ import { UserEditDrawerComponent } from './user-edit-drawer/user-edit-drawer.com
 import { RoleSelectComponent } from './role-select/role-select.component';
 import { ResourceComponent } from './routes/resource/resource.component';
 import { MenuComponent } from './menu/menu.component';
+import {ResourceTypePipe} from './resource-type.pipe';
 
 registerLocaleData(zh);
 
@@ -42,7 +43,8 @@ registerLocaleData(zh);
     ResourceTreeComponent,
     AvatarComponent,
     RoleComponent,
-    GenderPipePipe,
+    GenderPipe,
+    ResourceTypePipe,
     UserSelectorComponent,
     HeaderUserComponent,
     UserProfileDrawerComponent,

@@ -1,4 +1,4 @@
-<nz-table #nestedTable [nzData]="listOfResource" [nzPageSize]="10">
+<nz-table #expandTable [nzData]="listOfMapData">
   <thead>
   <tr>
     <th nzShowExpand></th>
@@ -19,65 +19,35 @@
   </tr>
   </thead>
   <tbody>
-  <ng-template ngFor let-data [ngForOf]="nestedTable.data">
-    <tr>
-      <td nzShowExpand [(nzExpand)]="data.expand" *ngIf="data.children.length > 0"></td>
-      <td *ngIf="data.children.length == 0"></td>
-      <td>{{ data.id }}</td>
-      <td>{{ data.name }}</td>
-      <td>{{ data.level }}</td>
-      <td>{{ data.type }}</td>
-      <td>{{ data.code }}</td>
-      <td>{{ data.uri }}</td>
-      <td>{{ data.method }}</td>
-      <td>{{ data.icon }}</td>
-      <td>{{ data.parentId }}</td>
-      <td>{{ data.status }}</td>
-      <td>{{ data.createAt }}</td>
-      <td>{{ data.createBy }}</td>
-      <td>{{ data.updateAt }}</td>
-      <td>{{ data.updateBy }}</td>
-    </tr>
-    <ng-template *ngIf="data.expand" ngFor let-data [ngForOf]="data.children">
-      <tr class="tr-children">
-        <td nzShowExpand [(nzExpand)]="data.expand" *ngIf="data.children.length > 0"></td>
-        <td *ngIf="data.children.length == 0"></td>
-        <td>{{ data.id }}</td>
-        <td>{{ data.name }}</td>
-        <td>{{ data.level }}</td>
-        <td>{{ data.type }}</td>
-        <td>{{ data.code }}</td>
-        <td>{{ data.uri }}</td>
-        <td>{{ data.method }}</td>
-        <td>{{ data.icon }}</td>
-        <td>{{ data.parentId }}</td>
-        <td>{{ data.status }}</td>
-        <td>{{ data.createAt }}</td>
-        <td>{{ data.createBy }}</td>
-        <td>{{ data.updateAt }}</td>
-        <td>{{ data.updateBy }}</td>
+  <ng-container *ngFor="let data of expandTable.data">
+    <ng-container *ngFor="let item of mapOfExpandedData[data.id]">
+      <tr *ngIf="(item.parent && item.parent.expand) || !item.parent">
+        <td
+          [nzIndentSize]="item.level * 20"
+          [nzShowExpand]="!!item.children"
+          [(nzExpand)]="item.expand"
+          (nzExpandChange)="collapse(mapOfExpandedData[data.id], item, $event)"></td>
+        <td>{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.level }}</td>
+        <td>{{ item.type | resourceTypePipe}}</td>
+        <td>{{ item.code }}</td>
+        <td>{{ item.uri }}</td>
+        <td>
+          <nz-tag [nzColor]="'red'">{{ item.method }}</nz-tag>
+        </td>
+        <td>{{ item.icon }}</td>
+        <td>{{ item.parentId }}</td>
+        <td>
+          <nz-tag [nzColor]="'green'" *ngIf="data.status==1">已启用</nz-tag>
+          <nz-tag [nzColor]="'gray'" *ngIf="data.status==0">未启用</nz-tag>
+        </td>
+        <td>{{ item.createAt }}</td>
+        <td>{{ item.createBy }}</td>
+        <td>{{ item.updateAt }}</td>
+        <td>{{ item.updateBy }}</td>
       </tr>
-      <ng-template *ngIf="data.expand" ngFor let-data [ngForOf]="data.children">
-        <tr class="tr-children">
-          <td nzShowExpand [(nzExpand)]="data.expand" *ngIf="data.children.length > 0"></td>
-          <td *ngIf="data.children.length == 0"></td>
-          <td>{{ data.id }}</td>
-          <td>{{ data.name }}</td>
-          <td>{{ data.level }}</td>
-          <td>{{ data.type }}</td>
-          <td>{{ data.code }}</td>
-          <td>{{ data.uri }}</td>
-          <td>{{ data.method }}</td>
-          <td>{{ data.icon }}</td>
-          <td>{{ data.parentId }}</td>
-          <td>{{ data.status }}</td>
-          <td>{{ data.createAt }}</td>
-          <td>{{ data.createBy }}</td>
-          <td>{{ data.updateAt }}</td>
-          <td>{{ data.updateBy }}</td>
-        </tr>
-      </ng-template>
-    </ng-template>
-  </ng-template>
+    </ng-container>
+  </ng-container>
   </tbody>
 </nz-table>

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-interface Resource {
+interface TreeNodeInterface {
   id: number;
   name: string;
   level: number;
@@ -13,28 +13,11 @@ interface Resource {
   status: number;
   createAt: string;
   updateAt: string;
-  createBy: number;
-  updateBy: number;
-  children: Resource[];
-  expand: boolean;
-}
-
-interface ParentItemData {
-  key: number;
-  name: string;
-  platform: string;
-  version: string;
-  upgradeNum: number | string;
-  creator: string;
-  createdAt: string;
-  expand: boolean;
-}
-
-interface ChildrenItemData {
-  key: number;
-  name: string;
-  date: string;
-  upgradeNum: string;
+  createBy: string;
+  updateBy: string;
+  expand?: boolean;
+  children?: TreeNodeInterface[];
+  parent?: TreeNodeInterface;
 }
 
 @Component({
@@ -43,10 +26,9 @@ interface ChildrenItemData {
   styleUrls: ['./resource.component.less']
 })
 export class ResourceComponent implements OnInit {
-  listOfParentData: ParentItemData[] = [];
-  listOfChildrenData: ChildrenItemData[] = [];
+  mapOfExpandedData: { [id: string]: TreeNodeInterface[] } = {};
 
-  listOfResource: Resource[] = [{
+  listOfMapData: TreeNodeInterface[] = [{
     id: 1,
     name: '所有权限',
     level: 0,
@@ -59,38 +41,38 @@ export class ResourceComponent implements OnInit {
     status: 1,
     createAt: '2014-12-24 23:12:00',
     updateAt: '2014-12-24 23:12:00',
-    createBy: 1,
-    updateBy: 1,
+    createBy: 'oktfolio',
+    updateBy: 'oktfolio',
     children: [{
       id: 3,
-      name: '所有权限',
+      name: '所有权限3',
       level: 1,
       type: 1,
       code: 'RES_ALL',
       uri: '/dgas/grewhfewdv/y4reutbv3/543ghsdf',
-      method: '*',
+      method: 'DELETE',
       icon: '/icon',
       parentId: 1,
       status: 1,
       createAt: '2014-12-24 23:12:00',
       updateAt: '2014-12-24 23:12:00',
-      createBy: 1,
-      updateBy: 1,
+      createBy: 'oktfolio',
+      updateBy: 'oktfolio',
       children: [{
         id: 5,
-        name: '所有权限',
-        level: 1,
+        name: '所有权限5',
+        level: 2,
         type: 1,
         code: 'RES_ALL',
         uri: '/dgas/grewhfewdv/y4reutbv3/543ghsdf',
-        method: '*',
+        method: 'PATCH',
         icon: '/icon',
         parentId: 3,
         status: 1,
         createAt: '2014-12-24 23:12:00',
         updateAt: '2014-12-24 23:12:00',
-        createBy: 1,
-        updateBy: 1,
+        createBy: 'oktfolio',
+        updateBy: 'oktfolio',
         children: [],
         expand: false,
       }],
@@ -99,80 +81,101 @@ export class ResourceComponent implements OnInit {
     expand: false,
   }, {
     id: 2,
-    name: '所有权限',
+    name: '所有权限2',
     level: 0,
     type: 1,
     code: 'RES_ALL',
     uri: '/**',
-    method: '*',
+    method: 'PUT',
     icon: '/icon',
     parentId: null,
     status: 1,
     createAt: '2014-12-24 23:12:00',
     updateAt: '2014-12-24 23:12:00',
-    createBy: 1,
-    updateBy: 1,
+    createBy: 'oktfolio',
+    updateBy: 'oktfolio',
     children: [{
       id: 4,
-      name: '所有权限',
+      name: '所有权限4',
       level: 1,
       type: 1,
       code: 'RES_ALL',
       uri: '/**',
-      method: '*',
+      method: 'GET',
       icon: '/icon',
       parentId: 2,
-      status: 1,
+      status: 0,
       createAt: '2014-12-24 23:12:00',
       updateAt: '2014-12-24 23:12:00',
-      createBy: 1,
-      updateBy: 1,
+      createBy: 'oktfolio',
+      updateBy: 'oktfolio',
       children: [],
       expand: false,
     }],
     expand: false,
-  }, {id: 2,
-    name: '所有权限',
+  }, {
+    id: 3,
+    name: '所有权限3',
     level: 0,
     type: 1,
     code: 'RES_ALL',
     uri: '/**',
-    method: '*',
+    method: 'POST',
     icon: '/icon',
     parentId: null,
-    status: 1,
+    status: 0,
     createAt: '2014-12-24 23:12:00',
     updateAt: '2014-12-24 23:12:00',
-    createBy: 1,
-    updateBy: 1,
+    createBy: 'oktfolio',
+    updateBy: 'oktfolio',
     children: [],
-    expand: false}];
+    expand: false
+  }];
 
+  collapse(array: TreeNodeInterface[], data: TreeNodeInterface, $event: boolean): void {
+    if ($event === false) {
+      if (data.children) {
+        data.children.forEach(d => {
+          const target = array.find(a => a.id === d.id)!;
+          target.expand = false;
+          this.collapse(array, target, false);
+        });
+      } else {
+        return;
+      }
+    }
+  }
+
+  convertTreeToList(root: TreeNodeInterface): TreeNodeInterface[] {
+    const stack: TreeNodeInterface[] = [];
+    const array: TreeNodeInterface[] = [];
+    const hashMap = {};
+    stack.push({...root, level: 0, expand: false});
+
+    while (stack.length !== 0) {
+      const node = stack.pop()!;
+      this.visitNode(node, hashMap, array);
+      if (node.children) {
+        for (let i = node.children.length - 1; i >= 0; i--) {
+          stack.push({...node.children[i], level: node.level! + 1, expand: false, parent: node});
+        }
+      }
+    }
+
+    return array;
+  }
+
+  visitNode(node: TreeNodeInterface, hashMap: { [id: string]: boolean }, array: TreeNodeInterface[]): void {
+    if (!hashMap[node.id]) {
+      hashMap[node.id] = true;
+      array.push(node);
+    }
+  }
 
   ngOnInit(): void {
-    for (let i = 0; i < 3; ++i
-    ) {
-      this
-        .listOfParentData.push({
-        key: i,
-        name: 'Screem',
-        platform: 'iOS',
-        version: '10.3.4.5654',
-        upgradeNum: 500,
-        creator: 'Jack',
-        createdAt: '2014-12-24 23:12:00',
-        expand: false
-      });
-    }
-
-    for (let i = 0; i < 3; ++i) {
-      this.listOfChildrenData.push({
-        key: i,
-        date: '2014-12-24 23:12:00',
-        name: 'This is production name',
-        upgradeNum: 'Upgraded: 56'
-      });
-    }
+    this.listOfMapData.forEach(item => {
+      this.mapOfExpandedData[item.id] = this.convertTreeToList(item);
+    });
   }
 
 }
