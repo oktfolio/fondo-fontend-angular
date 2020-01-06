@@ -24,7 +24,7 @@
       <tr *ngIf="(item.parent && item.parent.expand) || !item.parent">
         <td
           [nzIndentSize]="item.level * 20"
-          [nzShowExpand]="!!item.children"
+          [nzShowExpand]="item.children.length > 0"
           [(nzExpand)]="item.expand"
           (nzExpandChange)="collapse(mapOfExpandedData[data.id], item, $event)"></td>
         <td>{{ item.id }}</td>
